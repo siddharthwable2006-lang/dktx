@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | Smart Pole Monitoring</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+
+            <div>
+                <h2>VIKRAMA</h2>
+                <span>SMART POLE</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="#dashboard" class="nav-item active">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#poles" class="nav-item">
+                <i class="fa-solid fa-tower-broadcast"></i>
+                <span>Pole Monitoring</span>
+            </a>
+
+            <a href="#energy" class="nav-item">
+                <i class="fa-solid fa-solar-panel"></i>
+                <span>Energy</span>
+            </a>
+
+            <a href="#analytics" class="nav-item">
+                <i class="fa-solid fa-chart-area"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="#alerts" class="nav-item">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Alerts</span>
+                <b id="alertBadge">0</b>
+            </a>
+
+            <a href="#system" class="nav-item">
+                <i class="fa-solid fa-microchip"></i>
+                <span>System</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="connection">
+                <span class="pulse"></span>
+                <div>
+                    <strong>System Online</strong>
+                    <small>IoT / GSM Connected</small>
+                </div>
+            </div>
+
+            <div class="version">
+                VIKRAMA v1.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="breadcrumb">
+                    Infrastructure / Smart Pole Network
+                </div>
+
+                <h1 id="pageTitle">Smart Pole Dashboard</h1>
+
+            </div>
+
+            <div class="top-actions">
+
+                <div class="live-status">
+                    <span class="live-dot"></span>
+                    LIVE
+                </div>
+
+                <div class="clock" id="clock">
+                    00:00:00
+                </div>
+
+                <button class="icon-button" onclick="toggleTheme()">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <div class="user-profile">
+                    <div class="avatar">V</div>
+
+                    <div>
+                        <strong>VIKRAMA</strong>
+                        <small>Industry Admin</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content" id="dashboard">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <div>
+
+                    <span class="eyebrow">
+                        INDUSTRIAL IoT MONITORING
+                    </span>
+
+                    <h2>
+                        Electrical Pole Health
+                        <span>Monitoring System</span>
+                    </h2>
+
+                    <p>
+                        Real-time monitoring of pole condition,
+                        conductor safety and renewable energy status.
+                    </p>
+
+                </div>
+
+                <div class="system-time">
+
+                    <span>LAST DATA UPDATE</span>
+
+                    <strong id="lastUpdate">
+                        Just now
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= KPI CARDS ================= -->
+
+            <div class="kpi-grid">
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon blue">
+                        <i class="fa-solid fa-tower-broadcast"></i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Total Poles</span>
+                        <h3 id="totalPoles">128</h3>
+                        <small>
+                            <i class="fa-solid fa-arrow-up"></i>
+                            Network monitored
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Healthy Poles</span>
+                        <h3 id="healthyPoles">114</h3>
+                        <small class="green-text">
+                            Normal condition
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon orange">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Warnings</span>
+                        <h3 id="warningPoles">9</h3>
+                        <small class="orange-text">
+                            Attention required
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card">
+
+                    <div class="kpi-icon red">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Critical</span>
+                        <h3 id="criticalPoles">5</h3>
+                        <small class="red-text">
+                            Immediate inspection
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= MAIN GRID ================= -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- POLE STATUS -->
+
+                <div class="panel pole-panel" id="poles">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="section-label">
+                                NETWORK
+                            </span>
+
+                            <h3>Pole Health Monitoring</h3>
+                        </div>
+
+                        <div class="panel-actions">
+
+                            <select id="poleSelect"
+                                    onchange="selectPole()">
+
+                                <option value="POL-001">
+                                    POL-001
+                                </option>
+
+                                <option value="POL-002">
+                                    POL-002
+                                </option>
+
+                                <option value="POL-003">
+                                    POL-003
+                                </option>
+
+                                <option value="POL-004">
+                                    POL-004
+                                </option>
+
+                                <option value="POL-005">
+                                    POL-005
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- POLE ID -->
+
+                    <div class="selected-pole">
+
+                        <div class="pole-symbol">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </div>
+
+                        <div>
+
+                            <span>SELECTED POLE</span>
+
+                            <h2 id="selectedPole">
+                                POL-001
+                            </h2>
+
+                        </div>
+
+                        <div class="status-pill healthy"
+                             id="poleStatus">
+
+                            <span></span>
+                            HEALTHY
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SENSOR CARDS -->
+
+                    <div class="sensor-grid">
+
+
+                        <div class="sensor-card">
+
+                            <div class="sensor-top">
+
+                                <span class="sensor-icon tilt">
+                                    <i class="fa-solid fa-compass"></i>
+                                </span>
+
+                                <span class="sensor-name">
+                                    POLE TILT
+                                </span>
+
+                            </div>
+
+                            <div class="sensor-value">
+
+                                <strong id="tiltValue">
+                                    2.4
+                                </strong>
+
+                                <span>°</span>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div id="tiltProgress"
+                                     style="width:24%">
+                                </div>
+
+                            </div>
+
+                            <small>
+                                Safe limit: 10°
+                            </small>
+
+                        </div>
+
+
+                        <div class="sensor-card">
+
+                            <div class="sensor-top">
+
+                                <span class="sensor-icon sag">
+                                    <i class="fa-solid fa-wave-square"></i>
+                                </span>
+
+                                <span class="sensor-name">
+                                    CONDUCTOR SAG
+                                </span>
+
+                            </div>
+
+                            <div class="sensor-value">
+
+                                <strong id="sagValue">
+                                    18.5
+                                </strong>
+
+                                <span>cm</span>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div id="sagProgress"
+                                     style="width:37%">
+                                </div>
+
+                            </div>
+
+                            <small>
+                                Safe limit: 50 cm
+                            </small>
+
+                        </div>
+
+
+                        <div class="sensor-card">
+
+                            <div class="sensor-top">
+
+                                <span class="sensor-icon leakage">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </span>
+
+                                <span class="sensor-name">
+                                    LEAKAGE CURRENT
+                                </span>
+
+                            </div>
+
+                            <div class="sensor-value">
+
+                                <strong id="leakageValue">
+                                    0.08
+                                </strong>
+
+                                <span>A</span>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div id="leakageProgress"
+                                     style="width:16%">
+                                </div>
+
+                            </div>
+
+                            <small>
+                                Safe limit: 0.50 A
+                            </small>
+
+                        </div>
+
+
+                        <div class="sensor-card">
+
+                            <div class="sensor-top">
+
+                                <span class="sensor-icon signal">
+                                    <i class="fa-solid fa-signal"></i>
+                                </span>
+
+                                <span class="sensor-name">
+                                    COMMUNICATION
+                                </span>
+
+                            </div>
+
+                            <div class="sensor-value signal-value">
+
+                                <strong>
+                                    ONLINE
+                                </strong>
+
+                            </div>
+
+                            <div class="signal-bars">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                            <small>
+                                IoT / GSM connected
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENERGY PANEL -->
+
+                <div class="panel energy-panel"
+                     id="energy">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                RENEWABLE ENERGY
+                            </span>
+
+                            <h3>Energy Management</h3>
+
+                        </div>
+
+                        <div class="day-mode"
+                             id="dayMode">
+
+                            <i class="fa-solid fa-sun"></i>
+                            DAY MODE
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ENERGY FLOW -->
+
+                    <div class="energy-flow">
+
+                        <div class="energy-node">
+
+                            <div class="energy-circle solar">
+
+                                <i class="fa-solid fa-sun"></i>
+
+                            </div>
+
+                            <strong id="solarPower">
+                                142 W
+                            </strong>
+
+                            <span>
+                                Solar Input
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-line">
+
+                            <div class="flow-animation"></div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+
+                        <div class="energy-node">
+
+                            <div class="energy-circle battery">
+
+                                <i class="fa-solid fa-battery-three-quarters"></i>
+
+                            </div>
+
+                            <strong id="batteryPercent">
+                                82%
+                            </strong>
+
+                            <span>
+                                Battery
+                            </span>
+
+                        </div>
+
+
+                        <div class="flow-line">
+
+                            <div class="flow-animation"></div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+
+                        <div class="energy-node">
+
+                            <div class="energy-circle load">
+
+                                <i class="fa-solid fa-lightbulb"></i>
+
+                            </div>
+
+                            <strong id="loadPower">
+                                96 W
+                            </strong>
+
+                            <span>
+                                DC Load
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BATTERY -->
+
+                    <div class="battery-section">
+
+                        <div class="battery-header">
+
+                            <div>
+
+                                <span>
+                                    BATTERY STATE OF CHARGE
+                                </span>
+
+                                <h3 id="batteryLarge">
+                                    82%
+                                </h3>
+
+                            </div>
+
+                            <span class="charging-status"
+                                  id="chargingStatus">
+
+                                <i class="fa-solid fa-bolt"></i>
+                                CHARGING
+
+                            </span>
+
+                        </div>
+
+                        <div class="battery-bar">
+
+                            <div id="batteryBar"
+                                 style="width:82%">
+                            </div>
+
+                        </div>
+
+                        <div class="battery-meta">
+
+                            <span>
+                                Voltage
+                                <strong id="batteryVoltage">
+                                    12.7 V
+                                </strong>
+                            </span>
+
+                            <span>
+                                Current
+                                <strong id="batteryCurrent">
+                                    3.4 A
+                                </strong>
+                            </span>
+
+                            <span>
+                                Estimated Runtime
+                                <strong id="runtime">
+                                    8.6 hrs
+                                </strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ANALYTICS ================= -->
+
+            <div class="analytics-grid"
+                 id="analytics">
+
+
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                LIVE ANALYTICS
+                            </span>
+
+                            <h3>Pole Condition Trends</h3>
+
+                        </div>
+
+                        <div class="chart-tabs">
+
+                            <button class="chart-tab active"
+                                    onclick="changeChart('tilt', this)">
+                                Tilt
+                            </button>
+
+                            <button class="chart-tab"
+                                    onclick="changeChart('sag', this)">
+                                Sag
+                            </button>
+
+                            <button class="chart-tab"
+                                    onclick="changeChart('leakage', this)">
+                                Leakage
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="sensorChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERTS -->
+
+                <div class="panel alert-panel"
+                     id="alerts">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                EVENTS
+                            </span>
+
+                            <h3>Recent Alerts</h3>
+
+                        </div>
+
+                        <span class="alert-count"
+                              id="alertCount">
+                            3 Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="alerts-list"
+                         id="alertsList">
+
+                        <div class="alert-item critical">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    High Leakage Current
+                                </strong>
+
+                                <p>
+                                    POL-003 · 0.62 A detected
+                                </p>
+
+                                <small>
+                                    2 minutes ago
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alert-item warning">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-wave-square"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Sag Approaching Limit
+                                </strong>
+
+                                <p>
+                                    POL-014 · 42.8 cm
+                                </p>
+
+                                <small>
+                                    8 minutes ago
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alert-item warning">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Pole Tilt Warning
+                                </strong>
+
+                                <p>
+                                    POL-024 · 7.6°
+                                </p>
+
+                                <small>
+                                    16 minutes ago
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SYSTEM ================= -->
+
+            <div class="panel system-panel"
+                 id="system">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            DEVICE HEALTH
+                        </span>
+
+                        <h3>System Status</h3>
+
+                    </div>
+
+                    <span class="status-pill healthy">
+                        <span></span>
+                        ALL SYSTEMS OPERATIONAL
+                    </span>
+
+                </div>
+
+
+                <div class="system-grid">
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                        <div>
+
+                            <span>ESP32 Controller</span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+                        <em>99.8%</em>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-compass"></i>
+
+                        <div>
+
+                            <span>MPU6050</span>
+
+                            <strong>
+                                Operational
+                            </strong>
+
+                        </div>
+
+                        <em>100%</em>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-ruler-horizontal"></i>
+
+                        <div>
+
+                            <span>Ultrasonic Sensor</span>
+
+                            <strong>
+                                Operational
+                            </strong>
+
+                        </div>
+
+                        <em>99.5%</em>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        <div>
+
+                            <span>ACS712</span>
+
+                            <strong>
+                                Operational
+                            </strong>
+
+                        </div>
+
+                        <em>99.9%</em>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                        <div>
+
+                            <span>IoT Gateway</span>
+
+                            <strong>
+                                Connected
+                            </strong>
+
+                        </div>
+
+                        <em>Strong</em>
+
+                    </div>
+
+
+                    <div class="system-item">
+
+                        <i class="fa-solid fa-sim-card"></i>
+
+                        <div>
+
+                            <span>GSM Network</span>
+
+                            <strong>
+                                Connected
+                            </strong>
+
+                        </div>
+
+                        <em>Excellent</em>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <footer>
+
+                <span>
+                    © 2026 VIKRAMA Smart Pole Monitoring System
+                </span>
+
+                <span>
+                    IoT • Renewable Energy • Smart Infrastructure
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
