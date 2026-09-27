@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | Alerts & Event Center</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                V
+            </div>
+
+            <div>
+                <h1>VIKRAMA</h1>
+                <span>SMART POLE SYSTEM</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            MONITORING
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Command Center</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▦</span>
+                <span>Pole Registry</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                <span>Pole Tilt</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌒</span>
+                <span>Conductor Sag</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                <span>Leakage Current</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">☀</span>
+                <span>Solar & Battery</span>
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">!</span>
+                <span>Alerts & Events</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            SYSTEM
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◉</span>
+                <span>ESP32 Connectivity</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="connection-status">
+
+                <span class="connection-dot"></span>
+
+                <div>
+                    <strong>ESP32 NETWORK</strong>
+                    <small>6 / 6 ONLINE</small>
+                </div>
+
+            </div>
+
+            <div class="version">
+                VIKRAMA v1.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="breadcrumb">
+                    SYSTEM / EVENT MANAGEMENT
+                </div>
+
+                <h2>Alerts & Event Center</h2>
+
+                <p>
+                    Centralized monitoring of smart pole events, warnings and system conditions
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="live-indicator">
+
+                    <span></span>
+
+                    LIVE EVENT MONITORING
+
+                </div>
+
+                <button
+                    class="icon-button"
+                    id="refreshBtn">
+
+                    ↻
+
+                </button>
+
+                <button
+                    class="icon-button"
+                    id="notificationBtn">
+
+                    ♢
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             KPI CARDS
+             ================================================= -->
+
+        <section class="kpi-grid">
+
+
+            <div class="kpi-card critical-card">
+
+                <div class="kpi-top">
+
+                    <span>CRITICAL ALERTS</span>
+
+                    <div class="kpi-icon critical">
+                        !
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value critical-text"
+                    id="criticalCount">
+
+                    2
+
+                </div>
+
+                <div class="kpi-description">
+                    Immediate attention required
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card warning-card">
+
+                <div class="kpi-top">
+
+                    <span>WARNINGS</span>
+
+                    <div class="kpi-icon warning">
+                        ⚠
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value warning-text"
+                    id="warningCount">
+
+                    3
+
+                </div>
+
+                <div class="kpi-description">
+                    Conditions requiring inspection
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card info-card">
+
+                <div class="kpi-top">
+
+                    <span>INFORMATION</span>
+
+                    <div class="kpi-icon info">
+                        i
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value info-text"
+                    id="infoCount">
+
+                    4
+
+                </div>
+
+                <div class="kpi-description">
+                    System and operational events
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+
+                    <span>UNRESOLVED</span>
+
+                    <div class="kpi-icon unresolved">
+                        ◌
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="unresolvedCount">
+
+                    5
+
+                </div>
+
+                <div class="kpi-description">
+                    Active events
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTROL BAR
+             ================================================= -->
+
+        <section class="control-panel">
+
+            <div class="filter-group">
+
+                <div class="field">
+
+                    <label>SEVERITY</label>
+
+                    <select id="severityFilter">
+
+                        <option value="all">
+                            All Events
+                        </option>
+
+                        <option value="critical">
+                            Critical
+                        </option>
+
+                        <option value="warning">
+                            Warning
+                        </option>
+
+                        <option value="info">
+                            Information
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>EVENT TYPE</label>
+
+                    <select id="typeFilter">
+
+                        <option value="all">
+                            All Types
+                        </option>
+
+                        <option value="tilt">
+                            Pole Tilt
+                        </option>
+
+                        <option value="sag">
+                            Conductor Sag
+                        </option>
+
+                        <option value="leakage">
+                            Leakage Current
+                        </option>
+
+                        <option value="energy">
+                            Solar / Battery
+                        </option>
+
+                        <option value="network">
+                            ESP32 Network
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>POLE</label>
+
+                    <select id="poleFilter">
+
+                        <option value="all">
+                            All Poles
+                        </option>
+
+                        <option value="POL-001">
+                            POL-001
+                        </option>
+
+                        <option value="POL-002">
+                            POL-002
+                        </option>
+
+                        <option value="POL-003">
+                            POL-003
+                        </option>
+
+                        <option value="POL-004">
+                            POL-004
+                        </option>
+
+                        <option value="POL-005">
+                            POL-005
+                        </option>
+
+                        <option value="POL-006">
+                            POL-006
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="control-actions">
+
+                <button
+                    class="secondary-button"
+                    id="ackAllBtn">
+
+                    ✓ Acknowledge Visible
+
+                </button>
+
+
+                <button
+                    class="primary-button"
+                    id="clearBtn">
+
+                    Clear Resolved
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ALERT SUMMARY
+             ================================================= -->
+
+        <section class="summary-grid">
+
+
+            <div class="panel alert-summary-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CURRENT SYSTEM CONDITION
+                        </span>
+
+                        <h3>Alert Health Overview</h3>
+
+                    </div>
+
+                    <span
+                        class="health-status"
+                        id="healthStatus">
+
+                        ATTENTION REQUIRED
+
+                    </span>
+
+                </div>
+
+
+                <div class="health-content">
+
+                    <div class="health-ring">
+
+                        <svg viewBox="0 0 120 120">
+
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r="48"
+                                class="ring-bg">
+                            </circle>
+
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r="48"
+                                class="ring-value"
+                                id="healthRing">
+                            </circle>
+
+                        </svg>
+
+
+                        <div class="health-center">
+
+                            <strong id="healthScore">
+                                82
+                            </strong>
+
+                            <span>
+                                HEALTH
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="health-details">
+
+                        <div class="health-line">
+
+                            <span>
+                                Poles Monitored
+                            </span>
+
+                            <strong>
+                                6
+                            </strong>
+
+                        </div>
+
+
+                        <div class="health-line">
+
+                            <span>
+                                Critical Events
+                            </span>
+
+                            <strong
+                                class="critical-text"
+                                id="healthCritical">
+
+                                2
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="health-line">
+
+                            <span>
+                                Active Warnings
+                            </span>
+
+                            <strong
+                                class="warning-text"
+                                id="healthWarning">
+
+                                3
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="health-line">
+
+                            <span>
+                                ESP32 Online
+                            </span>
+
+                            <strong
+                                class="green-text">
+
+                                6 / 6
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EVENT DISTRIBUTION -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            EVENT DISTRIBUTION
+                        </span>
+
+                        <h3>Events by Category</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="distribution">
+
+                    <div class="distribution-item">
+
+                        <div class="distribution-icon tilt">
+                            ⌁
+                        </div>
+
+                        <div class="distribution-info">
+
+                            <strong>
+                                Pole Tilt
+                            </strong>
+
+                            <div class="distribution-bar">
+
+                                <span
+                                    style="width:45%">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <b>
+                            3
+                        </b>
+
+                    </div>
+
+
+                    <div class="distribution-item">
+
+                        <div class="distribution-icon sag">
+                            ⌒
+                        </div>
+
+                        <div class="distribution-info">
+
+                            <strong>
+                                Conductor Sag
+                            </strong>
+
+                            <div class="distribution-bar">
+
+                                <span
+                                    style="width:65%">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <b>
+                            4
+                        </b>
+
+                    </div>
+
+
+                    <div class="distribution-item">
+
+                        <div class="distribution-icon leakage">
+                            ⚡
+                        </div>
+
+                        <div class="distribution-info">
+
+                            <strong>
+                                Leakage
+                            </strong>
+
+                            <div class="distribution-bar">
+
+                                <span
+                                    style="width:35%">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <b>
+                            2
+                        </b>
+
+                    </div>
+
+
+                    <div class="distribution-item">
+
+                        <div class="distribution-icon energy">
+                            ☀
+                        </div>
+
+                        <div class="distribution-info">
+
+                            <strong>
+                                Energy
+                            </strong>
+
+                            <div class="distribution-bar">
+
+                                <span
+                                    style="width:25%">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <b>
+                            1
+                        </b>
+
+                    </div>
+
+
+                    <div class="distribution-item">
+
+                        <div class="distribution-icon network">
+                            ◉
+                        </div>
+
+                        <div class="distribution-info">
+
+                            <strong>
+                                Network
+                            </strong>
+
+                            <div class="distribution-bar">
+
+                                <span
+                                    style="width:20%">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <b>
+                            1
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LIVE ALERT
+             ================================================= -->
+
+        <section class="panel live-alert-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        PRIORITY EVENT
+                    </span>
+
+                    <h3>Latest Critical Condition</h3>
+
+                </div>
+
+                <span class="pulse-badge">
+                    LIVE
+                </span>
+
+            </div>
+
+
+            <div class="priority-alert">
+
+                <div class="priority-icon">
+                    !
+                </div>
+
+
+                <div class="priority-content">
+
+                    <div class="priority-title">
+
+                        <strong>
+                            Critical Conductor Sag Detected
+                        </strong>
+
+                        <span>
+                            2 min ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        POL-005 has reported a conductor sag
+                        measurement of <strong>34.2 cm</strong>.
+                        The condition exceeds the configured
+                        demonstration threshold.
+
+                    </p>
+
+
+                    <div class="priority-meta">
+
+                        <span>
+                            POLE: POL-005
+                        </span>
+
+                        <span>
+                            SENSOR: ULTRASONIC
+                        </span>
+
+                        <span>
+                            VALUE: 34.2 cm
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="investigate-button"
+                    onclick="focusEvent('EVT-1005')">
+
+                    Investigate
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EVENT TIMELINE
+             ================================================= -->
+
+        <section class="panel event-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        REAL-TIME EVENT STREAM
+                    </span>
+
+                    <h3>Event Timeline</h3>
+
+                </div>
+
+
+                <span
+                    class="event-count"
+                    id="eventCount">
+
+                    10 EVENTS
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="event-list"
+                id="eventList">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EVENT TABLE
+             ================================================= -->
+
+        <section class="panel event-table-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        EVENT RECORDS
+                    </span>
+
+                    <h3>Alert Management</h3>
+
+                </div>
+
+
+                <span class="updated-label">
+                    Demo event database
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>EVENT ID</th>
+
+                            <th>TIME</th>
+
+                            <th>POLE</th>
+
+                            <th>TYPE</th>
+
+                            <th>MESSAGE</th>
+
+                            <th>SEVERITY</th>
+
+                            <th>STATUS</th>
+
+                            <th>ACTION</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="eventTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EVENT RULES
+             ================================================= -->
+
+        <section class="rules-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            DETECTION LOGIC
+                        </span>
+
+                        <h3>Alert Generation</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rule-list">
+
+
+                    <div class="rule">
+
+                        <div class="rule-icon critical">
+                            !
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Critical
+                            </strong>
+
+                            <p>
+                                Used for conditions requiring
+                                immediate inspection or intervention.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="rule">
+
+                        <div class="rule-icon warning">
+                            ⚠
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Warning
+                            </strong>
+
+                            <p>
+                                Indicates abnormal conditions
+                                requiring monitoring or inspection.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="rule">
+
+                        <div class="rule-icon info">
+                            i
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Information
+                            </strong>
+
+                            <p>
+                                Normal system events, recoveries
+                                and operational notifications.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            RESPONSE WORKFLOW
+                        </span>
+
+                        <h3>Event Lifecycle</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="workflow">
+
+                    <div class="workflow-step active">
+
+                        <span>01</span>
+
+                        <strong>
+                            DETECT
+                        </strong>
+
+                        <small>
+                            Sensor
+                        </small>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <span>02</span>
+
+                        <strong>
+                            CLASSIFY
+                        </strong>
+
+                        <small>
+                            Severity
+                        </small>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <span>03</span>
+
+                        <strong>
+                            ACKNOWLEDGE
+                        </strong>
+
+                        <small>
+                            Operator
+                        </small>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <span>04</span>
+
+                        <strong>
+                            RESOLVE
+                        </strong>
+
+                        <small>
+                            Action
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer>
+
+            <div>
+                VIKRAMA Smart Pole Monitoring System
+            </div>
+
+            <div>
+                Alerts & Event Center
+                <span>•</span>
+                ESP32 Ready
+                <span>•</span>
+                Demo Mode
+            </div>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

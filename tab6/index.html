@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | Solar & Battery Energy</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                V
+            </div>
+
+            <div>
+                <h1>VIKRAMA</h1>
+                <span>SMART POLE SYSTEM</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            MONITORING
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Command Center</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▦</span>
+                <span>Pole Registry</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                <span>Pole Tilt</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌒</span>
+                <span>Conductor Sag</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                <span>Leakage Current</span>
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">☀</span>
+                <span>Solar & Battery</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">!</span>
+                <span>Alerts & Events</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            SYSTEM
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◉</span>
+                <span>ESP32 Connectivity</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="connection-status">
+
+                <span class="connection-dot"></span>
+
+                <div>
+                    <strong>ESP32 NETWORK</strong>
+                    <small>Simulation Mode</small>
+                </div>
+
+            </div>
+
+            <div class="version">
+                VIKRAMA v1.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="breadcrumb">
+                    ENERGY / POWER MANAGEMENT
+                </div>
+
+                <h2>Solar & Battery Management</h2>
+
+                <p>
+                    Real-time monitoring of solar generation, battery storage and DC load
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="live-indicator">
+
+                    <span></span>
+
+                    LIVE ENERGY MONITORING
+
+                </div>
+
+
+                <button
+                    class="icon-button"
+                    id="refreshBtn">
+
+                    ↻
+
+                </button>
+
+
+                <button class="icon-button">
+
+                    ⚙
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             KPI CARDS
+             ================================================= -->
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+
+                    <span>SOLAR GENERATION</span>
+
+                    <div class="kpi-icon solar">
+                        ☀
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value solar-text"
+                    id="solarPower">
+
+                    142 W
+
+                </div>
+
+                <div class="kpi-description">
+                    Current photovoltaic output
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+
+                    <span>BATTERY SOC</span>
+
+                    <div class="kpi-icon battery">
+                        ▰
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value green-text"
+                    id="batterySoc">
+
+                    86%
+
+                </div>
+
+                <div class="kpi-description">
+                    Available stored energy
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+
+                    <span>DC LOAD</span>
+
+                    <div class="kpi-icon blue">
+                        ⚡
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value"
+                    id="dcLoad">
+
+                    78 W
+
+                </div>
+
+                <div class="kpi-description">
+                    Current system consumption
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+
+                    <span>ENERGY MODE</span>
+
+                    <div
+                        class="kpi-icon"
+                        id="modeIcon">
+
+                        ☀
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="kpi-value mode-text"
+                    id="energyMode">
+
+                    SOLAR
+
+                </div>
+
+                <div
+                    class="kpi-description"
+                    id="modeDescription">
+
+                    Solar supplying system
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             POLE CONTROL
+             ================================================= -->
+
+        <section class="control-panel">
+
+            <div class="control-left">
+
+                <div class="field">
+
+                    <label>SELECT POLE</label>
+
+                    <select id="poleSelect"></select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>OPERATING MODE</label>
+
+                    <select id="operationMode">
+
+                        <option value="auto">
+                            Automatic
+                        </option>
+
+                        <option value="day">
+                            Day Mode
+                        </option>
+
+                        <option value="night">
+                            Night Mode
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="control-right">
+
+                <button
+                    class="secondary-button"
+                    id="simulateBtn">
+
+                    ◉ Simulate Reading
+
+                </button>
+
+
+                <button
+                    class="primary-button"
+                    id="refreshDataBtn">
+
+                    ↻ Refresh Data
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ENERGY FLOW
+             ================================================= -->
+
+        <section class="panel energy-flow-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        LIVE POWER FLOW
+                    </span>
+
+                    <h3>Energy Distribution</h3>
+
+                </div>
+
+
+                <div
+                    class="day-night-badge"
+                    id="dayNightBadge">
+
+                    ☀ DAY MODE
+
+                </div>
+
+            </div>
+
+
+            <div class="energy-flow">
+
+                <!-- SOLAR -->
+
+                <div class="energy-node solar-node">
+
+                    <div class="energy-icon">
+                        ☀
+                    </div>
+
+                    <strong>Solar Panel</strong>
+
+                    <span>Photovoltaic Source</span>
+
+                    <div
+                        class="node-value"
+                        id="flowSolar">
+
+                        142 W
+
+                    </div>
+
+                </div>
+
+
+                <!-- ARROW -->
+
+                <div class="flow-arrow solar-arrow">
+
+                    <div class="flow-line"></div>
+
+                    <span>DIRECT SUPPLY</span>
+
+                </div>
+
+
+                <!-- DC LOAD -->
+
+                <div class="energy-node load-node">
+
+                    <div class="energy-icon">
+                        ⚡
+                    </div>
+
+                    <strong>DC Components</strong>
+
+                    <span>System Load</span>
+
+                    <div
+                        class="node-value"
+                        id="flowLoad">
+
+                        78 W
+
+                    </div>
+
+                </div>
+
+
+                <!-- BATTERY BRANCH -->
+
+                <div class="battery-branch">
+
+                    <div class="branch-line"></div>
+
+                    <span id="batteryFlowText">
+                        CHARGING
+                    </span>
+
+                </div>
+
+
+                <!-- BATTERY -->
+
+                <div class="energy-node battery-node">
+
+                    <div class="battery-visual">
+
+                        <div
+                            class="battery-fill"
+                            id="batteryFill">
+
+                        </div>
+
+                        <span
+                            id="batteryVisualPercent">
+
+                            86%
+
+                        </span>
+
+                    </div>
+
+                    <strong>Battery</strong>
+
+                    <span>Energy Storage</span>
+
+                    <div
+                        class="node-value"
+                        id="flowBattery">
+
+                        +64 W
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="energy-explanation">
+
+                <div class="logic-item active">
+
+                    <span class="logic-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>Daytime Operation</strong>
+
+                        <p>
+                            Solar generation supplies the DC load
+                            while surplus energy charges the battery.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="logic-item">
+
+                    <span class="logic-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>Nighttime Operation</strong>
+
+                        <p>
+                            When solar generation is unavailable,
+                            the battery supplies the DC components.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BATTERY + SOLAR STATUS
+             ================================================= -->
+
+        <section class="main-grid">
+
+
+            <!-- BATTERY -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ENERGY STORAGE
+                        </span>
+
+                        <h3>Battery Status</h3>
+
+                    </div>
+
+
+                    <span
+                        class="status-badge"
+                        id="batteryStatus">
+
+                        HEALTHY
+
+                    </span>
+
+                </div>
+
+
+                <div class="battery-section">
+
+                    <div class="large-battery">
+
+                        <div
+                            class="large-battery-fill"
+                            id="largeBatteryFill">
+
+                        </div>
+
+                        <div class="battery-level">
+
+                            <strong
+                                id="largeBatteryPercent">
+
+                                86%
+
+                            </strong>
+
+                            <span>
+                                STATE OF CHARGE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="battery-stats">
+
+                        <div class="stat-row">
+
+                            <span>Battery Voltage</span>
+
+                            <strong id="batteryVoltage">
+                                12.7 V
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-row">
+
+                            <span>Battery Current</span>
+
+                            <strong id="batteryCurrent">
+                                2.3 A
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-row">
+
+                            <span>Battery Power</span>
+
+                            <strong id="batteryPower">
+                                29.2 W
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-row">
+
+                            <span>Charge State</span>
+
+                            <strong
+                                class="green-text"
+                                id="chargeState">
+
+                                CHARGING
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SOLAR -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            PHOTOVOLTAIC SYSTEM
+                        </span>
+
+                        <h3>Solar Generation</h3>
+
+                    </div>
+
+
+                    <span class="online-badge">
+                        ONLINE
+                    </span>
+
+                </div>
+
+
+                <div class="solar-status">
+
+                    <div class="sun-visual">
+
+                        <div class="sun-core">
+                            ☀
+                        </div>
+
+                    </div>
+
+
+                    <div class="solar-main-value">
+
+                        <strong id="solarMainValue">
+                            142
+                        </strong>
+
+                        <span>
+                            W
+                        </span>
+
+                    </div>
+
+
+                    <div class="solar-details">
+
+                        <div>
+
+                            <span>Panel Voltage</span>
+
+                            <strong id="solarVoltage">
+                                18.4 V
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Panel Current</span>
+
+                            <strong id="solarCurrent">
+                                7.72 A
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Generation</span>
+
+                            <strong
+                                class="green-text"
+                                id="generationState">
+
+                                ACTIVE
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="solar-bar">
+
+                    <div
+                        class="solar-bar-fill"
+                        id="solarBarFill">
+
+                    </div>
+
+                </div>
+
+
+                <div class="solar-capacity">
+
+                    <span>
+                        0 W
+                    </span>
+
+                    <span>
+                        Rated: 200 W
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TREND CHARTS
+             ================================================= -->
+
+        <section class="content-grid">
+
+
+            <!-- SOLAR TREND -->
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            HISTORICAL PERFORMANCE
+                        </span>
+
+                        <h3>Solar Generation Trend</h3>
+
+                    </div>
+
+                    <span class="chart-unit">
+                        Watts (W)
+                    </span>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <svg
+                        id="solarChart"
+                        viewBox="0 0 900 320"
+                        preserveAspectRatio="none">
+                    </svg>
+
+                </div>
+
+
+                <div class="chart-legend">
+
+                    <span class="solar-legend"></span>
+
+                    Solar Output
+
+                </div>
+
+            </div>
+
+
+            <!-- BATTERY TREND -->
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            BATTERY PERFORMANCE
+                        </span>
+
+                        <h3>Battery SOC Trend</h3>
+
+                    </div>
+
+                    <span class="chart-unit">
+                        Percentage (%)
+                    </span>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <svg
+                        id="batteryChart"
+                        viewBox="0 0 900 320"
+                        preserveAspectRatio="none">
+                    </svg>
+
+                </div>
+
+
+                <div class="chart-legend">
+
+                    <span class="battery-legend"></span>
+
+                    Battery SOC
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             POLE ENERGY TABLE
+             ================================================= -->
+
+        <section class="panel pole-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        POLE-WISE ENERGY STATUS
+                    </span>
+
+                    <h3>Solar & Battery Condition</h3>
+
+                </div>
+
+
+                <span
+                    class="updated-label"
+                    id="tableUpdated">
+
+                    Updated just now
+
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>POLE ID</th>
+
+                            <th>SOLAR</th>
+
+                            <th>BATTERY SOC</th>
+
+                            <th>DC LOAD</th>
+
+                            <th>ENERGY SOURCE</th>
+
+                            <th>BATTERY STATE</th>
+
+                            <th>STATUS</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="poleTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM LOGIC
+             ================================================= -->
+
+        <section class="engineering-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ENERGY MANAGEMENT LOGIC
+                        </span>
+
+                        <h3>Day / Night Power Strategy</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="logic-flow">
+
+
+                    <div class="logic-card">
+
+                        <div class="logic-icon sun">
+                            ☀
+                        </div>
+
+                        <strong>DAYTIME</strong>
+
+                        <p>
+                            Solar panel generates power.
+                            DC components are supplied
+                            directly from solar generation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+
+                    <div class="logic-card">
+
+                        <div class="logic-icon battery">
+                            ▰
+                        </div>
+
+                        <strong>SURPLUS ENERGY</strong>
+
+                        <p>
+                            Available surplus solar energy
+                            is directed towards battery charging.
+                        </p>
+
+                    </div>
+
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+
+                    <div class="logic-card">
+
+                        <div class="logic-icon night">
+                            ☾
+                        </div>
+
+                        <strong>NIGHTTIME</strong>
+
+                        <p>
+                            Battery becomes the primary
+                            source for the DC components.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ENERGY BALANCE
+                        </span>
+
+                        <h3>Power Calculation</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="formula-card">
+
+                    <div class="formula-title">
+                        Daytime
+                    </div>
+
+                    <div class="formula">
+                        P<sub>solar</sub>
+                        =
+                        P<sub>load</sub>
+                        +
+                        P<sub>charge</sub>
+                    </div>
+
+
+                    <div class="formula-title night-title">
+                        Nighttime
+                    </div>
+
+                    <div class="formula">
+                        P<sub>battery</sub>
+                        =
+                        P<sub>load</sub>
+                    </div>
+
+                </div>
+
+
+                <p class="formula-note">
+
+                    The actual power balance depends on
+                    converter efficiency, battery characteristics,
+                    charging limits and connected DC loads.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer>
+
+            <div>
+                VIKRAMA Smart Pole Monitoring System
+            </div>
+
+            <div>
+                Solar & Battery Module
+                <span>•</span>
+                ESP32 Ready
+                <span>•</span>
+                Demo Mode
+            </div>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | Leakage Current Monitoring</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">V</div>
+
+            <div>
+                <h1>VIKRAMA</h1>
+                <span>SMART POLE SYSTEM</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            MONITORING
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Command Center</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▦</span>
+                <span>Pole Registry</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                <span>Pole Tilt</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌒</span>
+                <span>Conductor Sag</span>
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">⚡</span>
+                <span>Leakage Current</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">☀</span>
+                <span>Solar & Battery</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">!</span>
+                <span>Alerts & Events</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-section">
+            SYSTEM
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◉</span>
+                <span>ESP32 Connectivity</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="connection-status">
+                <span class="connection-dot"></span>
+
+                <div>
+                    <strong>ESP32 NETWORK</strong>
+                    <small>Simulation Mode</small>
+                </div>
+            </div>
+
+            <div class="version">
+                VIKRAMA v1.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="breadcrumb">
+                    MONITORING / ELECTRICAL SAFETY
+                </div>
+
+                <h2>Leakage Current Detection</h2>
+
+                <p>
+                    Real-time monitoring of electrical leakage across connected poles
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="live-indicator">
+                    <span></span>
+                    LIVE MONITORING
+                </div>
+
+                <button class="icon-button" id="refreshBtn">
+                    ↻
+                </button>
+
+                <button class="icon-button">
+                    ⚙
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= KPI CARDS ================= -->
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>MONITORED POLES</span>
+                    <div class="kpi-icon blue">▦</div>
+                </div>
+
+                <div class="kpi-value" id="totalPoles">
+                    6
+                </div>
+
+                <div class="kpi-description">
+                    Connected leakage sensors
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>NORMAL</span>
+                    <div class="kpi-icon green">✓</div>
+                </div>
+
+                <div class="kpi-value green-text" id="normalCount">
+                    0
+                </div>
+
+                <div class="kpi-description">
+                    Within configured range
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>WARNING</span>
+                    <div class="kpi-icon yellow">!</div>
+                </div>
+
+                <div class="kpi-value yellow-text" id="warningCount">
+                    0
+                </div>
+
+                <div class="kpi-description">
+                    Requires observation
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>CRITICAL</span>
+                    <div class="kpi-icon red">⚠</div>
+                </div>
+
+                <div class="kpi-value red-text" id="criticalCount">
+                    0
+                </div>
+
+                <div class="kpi-description">
+                    Immediate inspection
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CONTROL BAR ================= -->
+
+        <section class="control-panel">
+
+            <div class="control-left">
+
+                <div class="field">
+
+                    <label>SELECT POLE</label>
+
+                    <select id="poleSelect"></select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>MONITORING POINT</label>
+
+                    <select id="monitorPoint">
+
+                        <option>Primary Leakage Sensor</option>
+                        <option>Secondary Sensor</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="control-right">
+
+                <button class="secondary-button" id="simulateBtn">
+                    <span>◉</span>
+                    Simulate Reading
+                </button>
+
+                <button class="primary-button" id="refreshDataBtn">
+                    ↻ Refresh Data
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MAIN MONITOR ================= -->
+
+        <section class="main-grid">
+
+            <!-- CURRENT DISPLAY -->
+
+            <div class="panel current-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            LIVE SENSOR READING
+                        </span>
+
+                        <h3>Leakage Current</h3>
+
+                    </div>
+
+                    <span class="status-badge" id="statusBadge">
+                        NORMAL
+                    </span>
+
+                </div>
+
+
+                <div class="current-display">
+
+                    <div class="current-ring">
+
+                        <div class="ring-inner">
+
+                            <strong id="currentValue">
+                                0.08
+                            </strong>
+
+                            <span>A</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="current-info">
+
+                        <div class="info-row">
+
+                            <span>Current Status</span>
+
+                            <strong id="currentStatus">
+                                Normal
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>Last Updated</span>
+
+                            <strong id="lastUpdated">
+                                Just now
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>Sensor</span>
+
+                            <strong>
+                                ACS712
+                            </strong>
+
+                        </div>
+
+                        <div class="info-row">
+
+                            <span>Pole ID</span>
+
+                            <strong id="currentPole">
+                                POL-001
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ALERT BAR -->
+
+                <div class="alert-strip" id="alertStrip">
+
+                    <div class="alert-symbol">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong id="alertTitle">
+                            Electrical condition normal
+                        </strong>
+
+                        <p id="alertText">
+                            Leakage current is currently within the configured monitoring range.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SENSOR STATUS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SENSOR DIAGNOSTICS
+                        </span>
+
+                        <h3>ACS712 Health</h3>
+
+                    </div>
+
+                    <span class="online-badge">
+                        ONLINE
+                    </span>
+
+                </div>
+
+
+                <div class="diagnostic-list">
+
+                    <div class="diagnostic-item">
+
+                        <div class="diagnostic-icon">
+                            ⚡
+                        </div>
+
+                        <div class="diagnostic-content">
+
+                            <span>Sensor Connection</span>
+
+                            <strong>Connected</strong>
+
+                        </div>
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="diagnostic-item">
+
+                        <div class="diagnostic-icon">
+                            ∿
+                        </div>
+
+                        <div class="diagnostic-content">
+
+                            <span>Signal Stability</span>
+
+                            <strong id="signalStatus">
+                                Stable
+                            </strong>
+
+                        </div>
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="diagnostic-item">
+
+                        <div class="diagnostic-icon">
+                            V
+                        </div>
+
+                        <div class="diagnostic-content">
+
+                            <span>Analog Output</span>
+
+                            <strong id="analogOutput">
+                                2.54 V
+                            </strong>
+
+                        </div>
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="diagnostic-item">
+
+                        <div class="diagnostic-icon">
+                            ◉
+                        </div>
+
+                        <div class="diagnostic-content">
+
+                            <span>ESP32 Link</span>
+
+                            <strong>
+                                Connected
+                            </strong>
+
+                        </div>
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sensor-footer">
+
+                    <div>
+                        <span>Device</span>
+                        <strong>ESP32-001</strong>
+                    </div>
+
+                    <div>
+                        <span>Sampling</span>
+                        <strong>1 sec</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TREND + THRESHOLDS ================= -->
+
+        <section class="content-grid">
+
+            <!-- TREND -->
+
+            <div class="panel trend-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            HISTORICAL DATA
+                        </span>
+
+                        <h3>Leakage Current Trend</h3>
+
+                    </div>
+
+                    <div class="chart-unit">
+                        Ampere (A)
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <svg
+                        id="trendChart"
+                        viewBox="0 0 900 320"
+                        preserveAspectRatio="none">
+                    </svg>
+
+                </div>
+
+
+                <div class="chart-legend">
+
+                    <div>
+                        <span class="legend-line"></span>
+                        Leakage Current
+                    </div>
+
+                    <div>
+                        <span class="legend-normal"></span>
+                        Normal Range
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- THRESHOLDS -->
+
+            <div class="panel threshold-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CONFIGURATION
+                        </span>
+
+                        <h3>Monitoring Thresholds</h3>
+
+                    </div>
+
+                    <span class="config-badge">
+                        CONFIGURED
+                    </span>
+
+                </div>
+
+
+                <div class="threshold-item">
+
+                    <div class="threshold-heading">
+
+                        <span class="threshold-dot green-dot"></span>
+
+                        <strong>Normal</strong>
+
+                    </div>
+
+                    <span class="threshold-value">
+                        ≤ 0.10 A
+                    </span>
+
+                </div>
+
+
+                <div class="threshold-item">
+
+                    <div class="threshold-heading">
+
+                        <span class="threshold-dot yellow-dot"></span>
+
+                        <strong>Warning</strong>
+
+                    </div>
+
+                    <span class="threshold-value">
+                        0.10 – 0.30 A
+                    </span>
+
+                </div>
+
+
+                <div class="threshold-item">
+
+                    <div class="threshold-heading">
+
+                        <span class="threshold-dot red-dot"></span>
+
+                        <strong>Critical</strong>
+
+                    </div>
+
+                    <span class="threshold-value">
+                        &gt; 0.30 A
+                    </span>
+
+                </div>
+
+
+                <div class="threshold-note">
+
+                    <strong>Engineering Note</strong>
+
+                    <p>
+                        These values are configurable demonstration thresholds.
+                        Final alarm limits should be determined from the actual
+                        electrical system, sensor characteristics and applicable
+                        engineering requirements.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= POLE CONDITION ================= -->
+
+        <section class="panel pole-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        POLE-WISE MONITORING
+                    </span>
+
+                    <h3>Leakage Condition by Pole</h3>
+
+                </div>
+
+                <span class="updated-label" id="tableUpdated">
+                    Updated just now
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>POLE ID</th>
+                            <th>LEAKAGE CURRENT</th>
+                            <th>STATUS</th>
+                            <th>SENSOR</th>
+                            <th>SIGNAL</th>
+                            <th>LAST UPDATE</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="poleTableBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ENGINEERING INFORMATION ================= -->
+
+        <section class="engineering-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SYSTEM INFORMATION
+                        </span>
+
+                        <h3>Leakage Detection Architecture</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="architecture">
+
+                    <div class="architecture-node">
+
+                        <div class="node-icon">
+                            ⚡
+                        </div>
+
+                        <strong>Electrical Line</strong>
+
+                        <span>Monitored circuit</span>
+
+                    </div>
+
+
+                    <div class="architecture-arrow">
+                        →
+                    </div>
+
+
+                    <div class="architecture-node">
+
+                        <div class="node-icon">
+                            ◉
+                        </div>
+
+                        <strong>ACS712</strong>
+
+                        <span>Current sensor</span>
+
+                    </div>
+
+
+                    <div class="architecture-arrow">
+                        →
+                    </div>
+
+
+                    <div class="architecture-node">
+
+                        <div class="node-icon">
+                            ◈
+                        </div>
+
+                        <strong>ESP32</strong>
+
+                        <span>Data processing</span>
+
+                    </div>
+
+
+                    <div class="architecture-arrow">
+                        →
+                    </div>
+
+
+                    <div class="architecture-node">
+
+                        <div class="node-icon">
+                            ▣
+                        </div>
+
+                        <strong>Dashboard</strong>
+
+                        <span>Monitoring</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel formula-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            MEASUREMENT
+                        </span>
+
+                        <h3>Current Measurement</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="formula">
+                    I<sub>leak</sub> =
+                    <span>V<sub>sensor</sub> − V<sub>offset</sub></span>
+                    <hr>
+                    Sensitivity
+                </div>
+
+
+                <p class="formula-description">
+                    The ESP32 reads the ACS712 analog output and converts
+                    the measured signal into current using the configured
+                    sensor offset and sensitivity.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <div>
+                VIKRAMA Smart Pole Monitoring System
+            </div>
+
+            <div>
+                Leakage Current Module
+                <span>•</span>
+                ESP32 Ready
+                <span>•</span>
+                Demo Mode
+            </div>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

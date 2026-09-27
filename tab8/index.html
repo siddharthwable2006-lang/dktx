@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | ESP32 & Connectivity</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">V</div>
+
+            <div>
+                <h1>VIKRAMA</h1>
+                <span>SMART POLE SYSTEM</span>
+            </div>
+        </div>
+
+        <div class="side-label">MONITORING</div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                Command Center
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▦</span>
+                Pole Registry
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                Pole Tilt
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">〰</span>
+                Conductor Sag
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                Leakage Current
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">☀</span>
+                Solar & Battery
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">!</span>
+                Alerts & Events
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">◉</span>
+                ESP32 & Connectivity
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                System Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>ESP32 Network Active</small>
+                </div>
+            </div>
+
+            <div class="version">
+                VIKRAMA v1.0.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <div class="breadcrumb">
+                    VIKRAMA / CONNECTIVITY
+                </div>
+
+                <h2>ESP32 & Connectivity</h2>
+
+                <p>
+                    Real-time communication and device health monitoring
+                </p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="connection-pill">
+                    <span class="pulse"></span>
+                    ESP32 NETWORK ACTIVE
+                </div>
+
+                <button class="btn secondary" id="demoToggle">
+                    DEMO MODE
+                </button>
+
+                <button class="btn primary" id="refreshBtn">
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= KPI SECTION ================= -->
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>ESP32 NODES</span>
+                    <span class="kpi-icon">◉</span>
+                </div>
+
+                <div class="kpi-value" id="totalNodes">
+                    6
+                </div>
+
+                <div class="kpi-footer">
+                    <span class="green">● 5 Online</span>
+                    <span>1 Offline</span>
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>ONLINE DEVICES</span>
+                    <span class="kpi-icon green-text">✓</span>
+                </div>
+
+                <div class="kpi-value green-text" id="onlineNodes">
+                    5
+                </div>
+
+                <div class="kpi-footer">
+                    <span>83.3% Availability</span>
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>AVG. SIGNAL</span>
+                    <span class="kpi-icon">⌁</span>
+                </div>
+
+                <div class="kpi-value">
+                    <span id="avgSignal">-61</span>
+                    <small>dBm</small>
+                </div>
+
+                <div class="signal-bars">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>AVG. LATENCY</span>
+                    <span class="kpi-icon">◌</span>
+                </div>
+
+                <div class="kpi-value">
+                    <span id="avgLatency">42</span>
+                    <small>ms</small>
+                </div>
+
+                <div class="kpi-footer">
+                    <span class="green">Stable connection</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DEVICE CONTROL ================= -->
+        <section class="section-header">
+
+            <div>
+                <h3>ESP32 Device Network</h3>
+
+                <p>
+                    Connected controllers and communication status
+                </p>
+            </div>
+
+            <div class="network-status">
+                <span class="status-dot"></span>
+                NETWORK HEALTHY
+            </div>
+
+        </section>
+
+
+        <!-- ================= DEVICE TABLE ================= -->
+        <section class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h3>ESP32 Node Registry</h3>
+                    <p>Live communication status of connected controllers</p>
+                </div>
+
+                <div class="panel-actions">
+
+                    <select id="statusFilter">
+                        <option value="ALL">All Status</option>
+                        <option value="ONLINE">Online</option>
+                        <option value="OFFLINE">Offline</option>
+                    </select>
+
+                    <button class="btn secondary" id="pingAllBtn">
+                        Ping All
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+                        <th>DEVICE</th>
+                        <th>POLE ID</th>
+                        <th>IP ADDRESS</th>
+                        <th>STATUS</th>
+                        <th>RSSI</th>
+                        <th>LATENCY</th>
+                        <th>LAST PACKET</th>
+                        <th>UPTIME</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="deviceTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TWO COLUMN ================= -->
+        <section class="two-column">
+
+
+            <!-- SELECTED DEVICE -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <h3>Selected ESP32</h3>
+                        <p>Detailed controller diagnostics</p>
+                    </div>
+
+                    <select id="deviceSelector">
+                        <option value="ESP32-001">ESP32-001</option>
+                        <option value="ESP32-002">ESP32-002</option>
+                        <option value="ESP32-003">ESP32-003</option>
+                        <option value="ESP32-004">ESP32-004</option>
+                        <option value="ESP32-005">ESP32-005</option>
+                        <option value="ESP32-006">ESP32-006</option>
+                    </select>
+
+                </div>
+
+
+                <div class="device-header">
+
+                    <div class="device-avatar">
+                        ESP
+                    </div>
+
+                    <div>
+
+                        <h3 id="selectedDevice">
+                            ESP32-001
+                        </h3>
+
+                        <p id="selectedPole">
+                            Connected to POL-001
+                        </p>
+
+                    </div>
+
+                    <div class="device-online">
+                        <span class="status-dot"></span>
+                        ONLINE
+                    </div>
+
+                </div>
+
+
+                <div class="diagnostic-grid">
+
+                    <div class="diagnostic">
+                        <span>IP ADDRESS</span>
+                        <strong id="ipAddress">
+                            192.168.1.101
+                        </strong>
+                    </div>
+
+                    <div class="diagnostic">
+                        <span>MAC ADDRESS</span>
+                        <strong id="macAddress">
+                            24:6F:28:A1:4B:91
+                        </strong>
+                    </div>
+
+                    <div class="diagnostic">
+                        <span>FIRMWARE</span>
+                        <strong id="firmware">
+                            VIKRAMA-1.0.4
+                        </strong>
+                    </div>
+
+                    <div class="diagnostic">
+                        <span>UPTIME</span>
+                        <strong id="uptime">
+                            04d 12h 38m
+                        </strong>
+                    </div>
+
+                    <div class="diagnostic">
+                        <span>RSSI</span>
+                        <strong id="deviceRssi">
+                            -58 dBm
+                        </strong>
+                    </div>
+
+                    <div class="diagnostic">
+                        <span>LATENCY</span>
+                        <strong id="deviceLatency">
+                            38 ms
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- SENSOR STATUS -->
+
+                <div class="sub-heading">
+                    SENSOR CONNECTIVITY
+                </div>
+
+                <div class="sensor-list">
+
+                    <div class="sensor-row">
+
+                        <div>
+                            <span class="sensor-name">
+                                MPU6050
+                            </span>
+
+                            <small>
+                                Pole Tilt Sensor
+                            </small>
+                        </div>
+
+                        <span class="sensor-status online">
+                            CONNECTED
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <div>
+                            <span class="sensor-name">
+                                HC-SR04
+                            </span>
+
+                            <small>
+                                Conductor Sag Sensor
+                            </small>
+                        </div>
+
+                        <span class="sensor-status online">
+                            CONNECTED
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <div>
+                            <span class="sensor-name">
+                                ACS712
+                            </span>
+
+                            <small>
+                                Leakage Current Sensor
+                            </small>
+                        </div>
+
+                        <span class="sensor-status online">
+                            CONNECTED
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <div>
+                            <span class="sensor-name">
+                                ENERGY MODULE
+                            </span>
+
+                            <small>
+                                Solar / Battery Monitoring
+                            </small>
+                        </div>
+
+                        <span class="sensor-status online">
+                            CONNECTED
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONNECTION CONFIG -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <h3>Connection Configuration</h3>
+
+                        <p>
+                            ESP32 communication endpoint
+                        </p>
+                    </div>
+
+                    <span class="config-badge">
+                        HTTP
+                    </span>
+
+                </div>
+
+
+                <div class="config-form">
+
+                    <label>
+                        ESP32 API Endpoint
+                    </label>
+
+                    <input
+                        type="text"
+                        id="endpointInput"
+                        placeholder="http://192.168.1.101/data"
+                        value="">
+
+                    <small>
+                        Example:
+                        http://ESP32-IP/data
+                    </small>
+
+
+                    <label>
+                        Polling Interval
+                    </label>
+
+                    <select id="pollInterval">
+
+                        <option value="2000">
+                            2 seconds
+                        </option>
+
+                        <option value="5000" selected>
+                            5 seconds
+                        </option>
+
+                        <option value="10000">
+                            10 seconds
+                        </option>
+
+                        <option value="30000">
+                            30 seconds
+                        </option>
+
+                    </select>
+
+
+                    <label class="checkbox-label">
+
+                        <input
+                            type="checkbox"
+                            id="autoPolling"
+                            checked>
+
+                        <span>
+                            Enable automatic polling
+                        </span>
+
+                    </label>
+
+
+                    <div class="config-buttons">
+
+                        <button
+                            class="btn primary"
+                            id="saveConfig">
+                            Save Configuration
+                        </button>
+
+                        <button
+                            class="btn secondary"
+                            id="testConnection">
+                            Test Connection
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LIVE DATA ================= -->
+        <section class="two-column">
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <h3>Live ESP32 Payload</h3>
+
+                        <p>
+                            Latest data received from controller
+                        </p>
+                    </div>
+
+                    <span class="live-badge">
+                        LIVE
+                    </span>
+
+                </div>
+
+                <pre class="json-viewer" id="jsonViewer">
+{
+  "deviceId": "ESP32-001",
+  "poleId": "POL-001",
+  "status": "ONLINE",
+  "rssi": -58,
+  "latency": 38,
+  "tilt": 2.4,
+  "sag": 12.5,
+  "leakage": 0.08,
+  "solarPower": 142,
+  "batterySoc": 86,
+  "timestamp": "2026-09-27T14:20:32"
+}
+                </pre>
+
+            </div>
+
+
+            <!-- COMMUNICATION LOG -->
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <h3>Communication Log</h3>
+
+                        <p>
+                            Recent ESP32 communication events
+                        </p>
+                    </div>
+
+                    <button
+                        class="btn secondary"
+                        id="clearLog">
+                        Clear
+                    </button>
+
+                </div>
+
+                <div
+                    class="communication-log"
+                    id="communicationLog">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NETWORK HEALTH ================= -->
+        <section class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h3>Network Diagnostics</h3>
+
+                    <p>
+                        Communication performance overview
+                    </p>
+                </div>
+
+                <span class="health-badge">
+                    HEALTHY
+                </span>
+
+            </div>
+
+
+            <div class="diagnostic-cards">
+
+                <div class="network-card">
+
+                    <span>PACKETS RECEIVED</span>
+
+                    <strong id="packetsReceived">
+                        12,846
+                    </strong>
+
+                    <small class="green">
+                        +128 today
+                    </small>
+
+                </div>
+
+
+                <div class="network-card">
+
+                    <span>PACKET LOSS</span>
+
+                    <strong id="packetLoss">
+                        0.42%
+                    </strong>
+
+                    <small>
+                        Within demo threshold
+                    </small>
+
+                </div>
+
+
+                <div class="network-card">
+
+                    <span>AVERAGE RESPONSE</span>
+
+                    <strong>
+                        42 ms
+                    </strong>
+
+                    <small class="green">
+                        Stable
+                    </small>
+
+                </div>
+
+
+                <div class="network-card">
+
+                    <span>LAST UPDATE</span>
+
+                    <strong id="lastUpdate">
+                        Just now
+                    </strong>
+
+                    <small>
+                        Auto refresh enabled
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ARCHITECTURE ================= -->
+        <section class="panel architecture-panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h3>ESP32 Communication Architecture</h3>
+
+                    <p>
+                        Data flow from field sensors to dashboard
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="architecture">
+
+                <div class="arch-node">
+
+                    <div class="arch-icon">
+                        ◉
+                    </div>
+
+                    <strong>FIELD SENSORS</strong>
+
+                    <small>
+                        MPU6050<br>
+                        Ultrasonic<br>
+                        ACS712<br>
+                        Energy Sensors
+                    </small>
+
+                </div>
+
+
+                <div class="arch-line">
+                    <span>DATA</span>
+                    → 
+                </div>
+
+
+                <div class="arch-node active-node">
+
+                    <div class="arch-icon">
+                        ESP
+                    </div>
+
+                    <strong>ESP32</strong>
+
+                    <small>
+                        Sensor Processing<br>
+                        Wi-Fi Communication<br>
+                        Data Packaging
+                    </small>
+
+                </div>
+
+
+                <div class="arch-line">
+                    <span>HTTP / Wi-Fi</span>
+                    →
+                </div>
+
+
+                <div class="arch-node">
+
+                    <div class="arch-icon">
+                        API
+                    </div>
+
+                    <strong>DATA ENDPOINT</strong>
+
+                    <small>
+                        REST API<br>
+                        MQTT / Cloud<br>
+                        Database
+                    </small>
+
+                </div>
+
+
+                <div class="arch-line">
+                    <span>LIVE DATA</span>
+                    →
+                </div>
+
+
+                <div class="arch-node dashboard-node">
+
+                    <div class="arch-icon">
+                        V
+                    </div>
+
+                    <strong>VIKRAMA</strong>
+
+                    <small>
+                        Monitoring<br>
+                        Analytics<br>
+                        Alerts
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+        <footer>
+
+            <span>
+                VIKRAMA SMART POLE MONITORING SYSTEM
+            </span>
+
+            <span>
+                ESP32 Connectivity Module
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

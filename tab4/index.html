@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#050b14">
+
+  <title>VIKRAMA | Conductor Sag Monitoring</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- ==================================================
+       SIDEBAR
+  =================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        V
+      </div>
+
+      <div>
+        <strong>VIKRAMA</strong>
+        <span>SMART POLE SYSTEM</span>
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="#" class="nav-item">
+        <span>⌂</span>
+        Command Center
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>▦</span>
+        Pole Registry
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>◈</span>
+        Pole Tilt
+      </a>
+
+      <a href="#" class="nav-item active">
+        <span>⌁</span>
+        Conductor Sag
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>ϟ</span>
+        Leakage Current
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>◉</span>
+        Solar & Battery
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>!</span>
+        Alerts Center
+      </a>
+
+      <a href="#" class="nav-item">
+        <span>⌘</span>
+        ESP32 & Connectivity
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <i></i>
+
+      <div>
+        <b>System Online</b>
+        <small>Live telemetry interface</small>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ==================================================
+       MAIN
+  =================================================== -->
+
+  <main class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          CONDUCTOR CONDITION MONITORING
+        </p>
+
+        <h1>
+          Conductor Sag Detection
+        </h1>
+
+        <p class="subtitle">
+          Real-time conductor sag and clearance monitoring
+          for ESP32-connected poles.
+        </p>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="ghost"
+          id="refreshBtn"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          class="primary"
+          id="simulateBtn"
+        >
+          ◎ Simulate Reading
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         KPI CARDS
+    =================================================== -->
+
+    <section class="kpis">
+
+      <article>
+
+        <span>MONITORED SPANS</span>
+
+        <strong id="total">
+          0
+        </strong>
+
+        <small>
+          Conductor telemetry
+        </small>
+
+      </article>
+
+
+      <article class="good">
+
+        <span>NORMAL</span>
+
+        <strong id="normal">
+          0
+        </strong>
+
+        <small>
+          Within safe range
+        </small>
+
+      </article>
+
+
+      <article class="warn">
+
+        <span>INSPECTION</span>
+
+        <strong id="warning">
+          0
+        </strong>
+
+        <small>
+          Elevated sag
+        </small>
+
+      </article>
+
+
+      <article class="bad">
+
+        <span>CRITICAL</span>
+
+        <strong id="critical">
+          0
+        </strong>
+
+        <small>
+          Excessive sag
+        </small>
+
+      </article>
+
+    </section>
+
+
+    <!-- ==================================================
+         WORKSPACE
+    =================================================== -->
+
+    <section class="workspace">
+
+
+      <!-- ==================================================
+           LEFT
+      =================================================== -->
+
+      <div class="left-column">
+
+
+        <!-- POLE SELECTOR -->
+
+        <div class="selector-card">
+
+          <div>
+
+            <span class="label">
+              SELECT SPAN
+            </span>
+
+            <h2 id="selectedId">
+              POL-001
+            </h2>
+
+            <p id="selectedLocation">
+              Main Gate • Sector A
+            </p>
+
+          </div>
+
+
+          <select id="poleSelect"></select>
+
+        </div>
+
+
+        <!-- ==================================================
+             CONDUCTOR PROFILE
+        =================================================== -->
+
+        <div class="profile-card">
+
+
+          <div class="card-title">
+
+            <div>
+
+              <span class="label">
+                LIVE CONDUCTOR PROFILE
+              </span>
+
+              <h2>
+                Sag Visualization
+              </h2>
+
+            </div>
+
+
+            <span class="live">
+
+              <i></i>
+
+              LIVE
+
+            </span>
+
+          </div>
+
+
+          <div class="profile-area">
+
+
+            <svg
+              id="conductorSvg"
+              viewBox="0 0 800 330"
+              preserveAspectRatio="none"
+            >
+
+              <!-- GRID -->
+
+              <g class="profile-grid">
+
+                <line
+                  x1="0"
+                  y1="65"
+                  x2="800"
+                  y2="65"
+                />
+
+                <line
+                  x1="0"
+                  y1="130"
+                  x2="800"
+                  y2="130"
+                />
+
+                <line
+                  x1="0"
+                  y1="195"
+                  x2="800"
+                  y2="195"
+                />
+
+                <line
+                  x1="0"
+                  y1="260"
+                  x2="800"
+                  y2="260"
+                />
+
+              </g>
+
+
+              <!-- SUPPORT POLES -->
+
+              <line
+                class="support-pole"
+                x1="90"
+                y1="70"
+                x2="90"
+                y2="275"
+              />
+
+              <line
+                class="support-pole"
+                x1="710"
+                y1="70"
+                x2="710"
+                y2="275"
+              />
+
+
+              <!-- TOP CROSS ARMS -->
+
+              <line
+                class="cross-arm"
+                x1="45"
+                y1="70"
+                x2="135"
+                y2="70"
+              />
+
+              <line
+                class="cross-arm"
+                x1="665"
+                y1="70"
+                x2="755"
+                y2="70"
+              />
+
+
+              <!-- CONDUCTOR -->
+
+              <path
+                id="conductorPath"
+                class="conductor"
+                d="
+                  M 90 70
+                  Q 400 115
+                  710 70
+                "
+              />
+
+
+              <!-- LASER / ULTRASONIC REFERENCE -->
+
+              <line
+                class="sensor-line"
+                x1="400"
+                y1="70"
+                x2="400"
+                y2="250"
+              />
+
+
+              <circle
+                id="sensorPoint"
+                class="sensor-point"
+                cx="400"
+                cy="115"
+                r="7"
+              />
+
+
+              <!-- SAG MEASUREMENT -->
+
+              <line
+                id="measurementLine"
+                class="measurement-line"
+                x1="420"
+                y1="70"
+                x2="420"
+                y2="115"
+              />
+
+            </svg>
+
+
+            <div class="support-label left-label">
+              POLE A
+            </div>
+
+            <div class="support-label right-label">
+              POLE B
+            </div>
+
+
+            <div class="sag-badge">
+
+              <span>
+                CURRENT SAG
+              </span>
+
+              <strong id="visualSag">
+                12.5 cm
+              </strong>
+
+            </div>
+
+
+            <div class="sensor-badge">
+
+              <span>
+                ULTRASONIC
+              </span>
+
+              <strong>
+                HC-SR04
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- PROFILE FOOTER -->
+
+          <div class="profile-footer">
+
+            <div>
+
+              <span>
+                Reference Span
+              </span>
+
+              <b id="spanLength">
+                30 m
+              </b>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Sensor Distance
+              </span>
+
+              <b id="sensorDistance">
+                1.25 m
+              </b>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Minimum Clearance
+              </span>
+
+              <b id="clearance">
+                8.4 m
+              </b>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Sag Ratio
+              </span>
+
+              <b id="sagRatio">
+                0.42%
+              </b>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             TREND
+        =================================================== -->
+
+        <div class="trend-card">
+
+
+          <div class="card-title">
+
+            <div>
+
+              <span class="label">
+                TREND ANALYSIS
+              </span>
+
+              <h2>
+                Sag History
+              </h2>
+
+            </div>
+
+
+            <span class="range">
+              LAST 12 READINGS
+            </span>
+
+          </div>
+
+
+          <div class="chart-wrap">
+
+
+            <div class="y-labels">
+
+              <span>
+                40 cm
+              </span>
+
+              <span>
+                30 cm
+              </span>
+
+              <span>
+                20 cm
+              </span>
+
+              <span>
+                10 cm
+              </span>
+
+              <span>
+                0
+              </span>
+
+            </div>
+
+
+            <div class="chart-area">
+
+              <div class="grid-lines">
+
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+
+              </div>
+
+
+              <svg
+                id="trendSvg"
+                viewBox="0 0 700 230"
+                preserveAspectRatio="none"
+              >
+
+                <defs>
+
+                  <linearGradient
+                    id="areaGradient"
+                    x1="0"
+                    x2="0"
+                    y1="0"
+                    y2="1"
+                  >
+
+                    <stop
+                      offset="0%"
+                      stop-color="#25d9ff"
+                      stop-opacity=".28"
+                    />
+
+                    <stop
+                      offset="100%"
+                      stop-color="#25d9ff"
+                      stop-opacity="0"
+                    />
+
+                  </linearGradient>
+
+                </defs>
+
+
+                <path
+                  id="areaPath"
+                  fill="url(#areaGradient)"
+                ></path>
+
+
+                <path
+                  id="linePath"
+                  fill="none"
+                  stroke="#25d9ff"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+
+
+                <g id="points"></g>
+
+              </svg>
+
+
+              <div class="threshold warning-line">
+
+                <span>
+                  Warning 20 cm
+                </span>
+
+              </div>
+
+
+              <div class="threshold critical-line">
+
+                <span>
+                  Critical 30 cm
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="x-labels">
+
+            <span>
+              -11
+            </span>
+
+            <span>
+              -8
+            </span>
+
+            <span>
+              -5
+            </span>
+
+            <span>
+              -2
+            </span>
+
+            <span>
+              Now
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           RIGHT
+      =================================================== -->
+
+      <aside class="right-column">
+
+
+        <!-- STATUS -->
+
+        <div class="status-card">
+
+          <span class="label">
+            CURRENT CONDITION
+          </span>
+
+
+          <div class="condition">
+
+
+            <div
+              class="condition-icon"
+              id="conditionIcon"
+            >
+              ✓
+            </div>
+
+
+            <div>
+
+              <h2 id="conditionText">
+                NORMAL
+              </h2>
+
+              <p id="conditionSub">
+                Conductor sag is within the
+                configured operating range.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="metric">
+
+            <div>
+
+              <span>
+                CURRENT SAG
+              </span>
+
+              <b id="currentSag">
+                12.5 cm
+              </b>
+
+            </div>
+
+
+            <div class="meter">
+
+              <i id="sagMeter"></i>
+
+            </div>
+
+          </div>
+
+
+          <div class="limits">
+
+            <div>
+
+              <span>
+                Normal
+              </span>
+
+              <b>
+                ≤ 20 cm
+              </b>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Warning
+              </span>
+
+              <b>
+                20–30 cm
+              </b>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Critical
+              </span>
+
+              <b>
+                &gt; 30 cm
+              </b>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SENSOR -->
+
+        <div class="diagnostic-card">
+
+
+          <div class="card-title">
+
+            <div>
+
+              <span class="label">
+                SENSOR DIAGNOSTICS
+              </span>
+
+              <h2>
+                Ultrasonic Sensor
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="sensor-status">
+
+            <div class="sensor-dot"></div>
+
+            <div>
+
+              <b>
+                SENSOR ONLINE
+              </b>
+
+              <small>
+                Distance measurement active
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="info">
+
+            <span>
+              Sensor
+            </span>
+
+            <b>
+              HC-SR04
+            </b>
+
+          </div>
+
+
+          <div class="info">
+
+            <span>
+              ESP32 Device
+            </span>
+
+            <b id="device">
+              ESP32-001
+            </b>
+
+          </div>
+
+
+          <div class="info">
+
+            <span>
+              Sampling Rate
+            </span>
+
+            <b>
+              1 reading/sec
+            </b>
+
+          </div>
+
+
+          <div class="info">
+
+            <span>
+              Measurement
+            </span>
+
+            <b>
+              Distance
+            </b>
+
+          </div>
+
+
+          <div class="info">
+
+            <span>
+              Last Update
+            </span>
+
+            <b id="update">
+              Just now
+            </b>
+
+          </div>
+
+        </div>
+
+
+        <!-- ENGINEERING -->
+
+        <div
+          class="alert-card"
+          id="alertCard"
+        >
+
+          <span class="label">
+            ENGINEERING NOTE
+          </span>
+
+
+          <p id="engineeringNote">
+
+            Current conductor sag is within
+            the configured normal range.
+
+          </p>
+
+        </div>
+
+
+        <!-- CALCULATION -->
+
+        <div class="formula-card">
+
+          <span class="label">
+            ENGINEERING CALCULATION
+          </span>
+
+
+          <h3>
+            Sag Ratio
+          </h3>
+
+
+          <div class="formula">
+
+            Sag Ratio =
+            <span>
+              Sag / Span
+            </span>
+
+          </div>
+
+
+          <p>
+
+            The dashboard calculates the relative
+            sag percentage using the measured sag
+            and conductor span length.
+
+          </p>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      <span>
+        VIKRAMA Smart Pole Monitoring Platform
+      </span>
+
+      <span>
+        Conductor Sag Module • Demo Telemetry
+      </span>
+
+    </footer>
+
+  </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

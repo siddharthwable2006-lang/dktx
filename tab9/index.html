@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIKRAMA | System Settings</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">V</div>
+
+            <div>
+                <h1>VIKRAMA</h1>
+                <span>SMART POLE SYSTEM</span>
+            </div>
+
+        </div>
+
+
+        <div class="side-label">
+            MONITORING
+        </div>
+
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                Command Center
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▦</span>
+                Pole Registry
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                Pole Tilt
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">〰</span>
+                Conductor Sag
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                Leakage Current
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">☀</span>
+                Solar & Battery
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">!</span>
+                Alerts & Events
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◉</span>
+                ESP32 & Connectivity
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">⚙</span>
+                System Settings
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Configuration Ready</small>
+                </div>
+
+            </div>
+
+
+            <div class="version">
+                VIKRAMA v1.0.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="breadcrumb">
+                    VIKRAMA / SYSTEM SETTINGS
+                </div>
+
+                <h2>
+                    System Settings
+                </h2>
+
+                <p>
+                    Configure monitoring, alerts, connectivity and energy parameters
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="system-pill">
+
+                    <span class="pulse"></span>
+
+                    SYSTEM CONFIGURATION
+
+                </div>
+
+
+                <button
+                    class="btn secondary"
+                    id="resetBtn">
+
+                    Reset
+
+                </button>
+
+
+                <button
+                    class="btn primary"
+                    id="saveAllBtn">
+
+                    ✓ Save All
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= SETTINGS NAVIGATION ================= -->
+
+        <section class="settings-layout">
+
+
+            <aside class="settings-menu">
+
+                <div class="settings-menu-title">
+                    SETTINGS
+                </div>
+
+
+                <button
+                    class="setting-tab active"
+                    data-section="general">
+
+                    <span>◉</span>
+
+                    General
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="thresholds">
+
+                    <span>⚠</span>
+
+                    Alert Thresholds
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="esp32">
+
+                    <span>ESP</span>
+
+                    ESP32 / API
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="energy">
+
+                    <span>☀</span>
+
+                    Energy System
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="poles">
+
+                    <span>▦</span>
+
+                    Pole Management
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="notifications">
+
+                    <span>🔔</span>
+
+                    Notifications
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="data">
+
+                    <span>▤</span>
+
+                    Data & Storage
+
+                </button>
+
+
+                <button
+                    class="setting-tab"
+                    data-section="system">
+
+                    <span>⚙</span>
+
+                    System
+
+                </button>
+
+            </aside>
+
+
+
+            <!-- ================= SETTINGS CONTENT ================= -->
+
+            <div class="settings-content">
+
+
+                <!-- ================= GENERAL ================= -->
+
+                <section
+                    class="settings-section active"
+                    id="general">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                General Configuration
+                            </h3>
+
+                            <p>
+                                Basic VIKRAMA dashboard preferences
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="card-title">
+                            Dashboard Identity
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+                                    System Name
+                                </label>
+
+                                <input
+                                    id="systemName"
+                                    type="text"
+                                    value="VIKRAMA Smart Pole System">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Project / Deployment Name
+                                </label>
+
+                                <input
+                                    id="deploymentName"
+                                    type="text"
+                                    value="Smart Pole Monitoring Network">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Location
+                                </label>
+
+                                <input
+                                    id="location"
+                                    type="text"
+                                    value="Sanjivani College of Engineering">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Time Zone
+                                </label>
+
+                                <select id="timezone">
+
+                                    <option selected>
+                                        Asia/Kolkata (IST)
+                                    </option>
+
+                                    <option>
+                                        UTC
+                                    </option>
+
+                                    <option>
+                                        Asia/Dubai
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="settings-card">
+
+                        <div class="card-title">
+                            Interface Preferences
+                        </div>
+
+
+                        <div class="preference-list">
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Compact Dashboard
+                                    </strong>
+
+                                    <small>
+                                        Reduce spacing between dashboard components
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="compactMode">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Auto Refresh
+                                    </strong>
+
+                                    <small>
+                                        Automatically refresh live monitoring data
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="autoRefresh"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Demo / Simulation Mode
+                                    </strong>
+
+                                    <small>
+                                        Use simulated sensor values for testing
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="demoMode"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= THRESHOLDS ================= -->
+
+                <section
+                    class="settings-section"
+                    id="thresholds">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                Alert Thresholds
+                            </h3>
+
+                            <p>
+                                Configure demo monitoring limits for dashboard alerts
+                            </p>
+
+                        </div>
+
+                        <span class="section-status warning">
+                            CONFIGURABLE
+                        </span>
+
+                    </div>
+
+
+                    <div class="threshold-grid">
+
+
+                        <div class="threshold-card">
+
+                            <div class="threshold-icon tilt">
+                                ⌁
+                            </div>
+
+                            <h4>
+                                Pole Tilt
+                            </h4>
+
+                            <p>
+                                MPU6050 tilt monitoring
+                            </p>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Warning
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="tiltWarning"
+                                        type="number"
+                                        value="3.0"
+                                        step="0.1">
+
+                                    <span>°</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Critical
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="tiltCritical"
+                                        type="number"
+                                        value="5.0"
+                                        step="0.1">
+
+                                    <span>°</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="threshold-card">
+
+                            <div class="threshold-icon sag">
+                                〰
+                            </div>
+
+                            <h4>
+                                Conductor Sag
+                            </h4>
+
+                            <p>
+                                Ultrasonic sensor monitoring
+                            </p>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Warning
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="sagWarning"
+                                        type="number"
+                                        value="20"
+                                        step="0.1">
+
+                                    <span>cm</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Critical
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="sagCritical"
+                                        type="number"
+                                        value="30"
+                                        step="0.1">
+
+                                    <span>cm</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="threshold-card">
+
+                            <div class="threshold-icon leakage">
+                                ⚡
+                            </div>
+
+                            <h4>
+                                Leakage Current
+                            </h4>
+
+                            <p>
+                                ACS712 current monitoring
+                            </p>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Warning
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="leakWarning"
+                                        type="number"
+                                        value="0.10"
+                                        step="0.01">
+
+                                    <span>A</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Critical
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="leakCritical"
+                                        type="number"
+                                        value="0.30"
+                                        step="0.01">
+
+                                    <span>A</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="threshold-card">
+
+                            <div class="threshold-icon battery">
+                                ◉
+                            </div>
+
+                            <h4>
+                                Battery SOC
+                            </h4>
+
+                            <p>
+                                Battery state-of-charge
+                            </p>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Warning
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="socWarning"
+                                        type="number"
+                                        value="40"
+                                        step="1">
+
+                                    <span>%</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="threshold-input">
+
+                                <label>
+                                    Critical
+                                </label>
+
+                                <div>
+                                    <input
+                                        id="socCritical"
+                                        type="number"
+                                        value="20"
+                                        step="1">
+
+                                    <span>%</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="engineering-note">
+
+                        <strong>
+                            Engineering Note
+                        </strong>
+
+                        <p>
+                            These threshold values are configuration examples
+                            for dashboard demonstration. Actual protection limits
+                            should be established according to the selected sensors,
+                            electrical system, battery chemistry, installation
+                            standards and engineering requirements.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= ESP32 ================= -->
+
+                <section
+                    class="settings-section"
+                    id="esp32">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                ESP32 & API Configuration
+                            </h3>
+
+                            <p>
+                                Configure communication between ESP32 nodes and VIKRAMA
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            NETWORK
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="card-title">
+                            Communication
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    ESP32 API Endpoint
+                                </label>
+
+                                <input
+                                    id="apiEndpoint"
+                                    type="text"
+                                    placeholder="http://192.168.1.101/data"
+                                    value="">
+
+                                <small>
+                                    Example: http://ESP32-IP/data
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Protocol
+                                </label>
+
+                                <select id="protocol">
+
+                                    <option selected>
+                                        HTTP / REST
+                                    </option>
+
+                                    <option>
+                                        HTTPS / REST
+                                    </option>
+
+                                    <option>
+                                        MQTT
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Polling Interval
+                                </label>
+
+                                <select id="pollingInterval">
+
+                                    <option value="2000">
+                                        2 seconds
+                                    </option>
+
+                                    <option
+                                        value="5000"
+                                        selected>
+                                        5 seconds
+                                    </option>
+
+                                    <option value="10000">
+                                        10 seconds
+                                    </option>
+
+                                    <option value="30000">
+                                        30 seconds
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Connection Timeout
+                                </label>
+
+                                <input
+                                    id="connectionTimeout"
+                                    type="number"
+                                    value="3000">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Maximum Retry Attempts
+                                </label>
+
+                                <input
+                                    id="retryAttempts"
+                                    type="number"
+                                    value="3">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="card-title">
+                            Connectivity Options
+                        </div>
+
+
+                        <div class="preference-list">
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Automatic Polling
+                                    </strong>
+
+                                    <small>
+                                        Automatically request data from ESP32
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="espPolling"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Connection Logging
+                                    </strong>
+
+                                    <small>
+                                        Store communication events in the dashboard log
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="connectionLogging"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= ENERGY ================= -->
+
+                <section
+                    class="settings-section"
+                    id="energy">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                Solar & Battery Settings
+                            </h3>
+
+                            <p>
+                                Configure the energy monitoring logic
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            ENERGY
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="card-title">
+                            Energy Mode
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Operating Mode
+                                </label>
+
+                                <select id="energyMode">
+
+                                    <option selected>
+                                        Automatic Day / Night
+                                    </option>
+
+                                    <option>
+                                        Force DAY
+                                    </option>
+
+                                    <option>
+                                        Force NIGHT
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Solar Start Time
+                                </label>
+
+                                <input
+                                    id="solarStart"
+                                    type="time"
+                                    value="06:00">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Solar End Time
+                                </label>
+
+                                <input
+                                    id="solarEnd"
+                                    type="time"
+                                    value="18:30">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Minimum Battery SOC
+                                </label>
+
+                                <div class="input-unit">
+
+                                    <input
+                                        id="minimumSoc"
+                                        type="number"
+                                        value="20">
+
+                                    <span>%</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="energy-flow-box">
+
+                        <div class="flow-title">
+                            ENERGY PRIORITY
+                        </div>
+
+
+                        <div class="flow">
+
+                            <div class="flow-node">
+                                ☀
+                                <span>Solar</span>
+                            </div>
+
+                            <div class="flow-arrow">
+                                →
+                            </div>
+
+                            <div class="flow-node active">
+                                DC LOAD
+                            </div>
+
+                            <div class="flow-arrow">
+                                →
+                            </div>
+
+                            <div class="flow-node battery-node">
+                                ◉
+                                <span>Battery</span>
+                            </div>
+
+                        </div>
+
+
+                        <p>
+                            Daytime priority: Solar → DC Load → Battery Charging
+                        </p>
+
+                        <p>
+                            Nighttime priority: Battery → DC Load
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= POLES ================= -->
+
+                <section
+                    class="settings-section"
+                    id="poles">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                Pole Management
+                            </h3>
+
+                            <p>
+                                Register and manage monitored smart poles
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="btn primary"
+                            id="addPoleBtn">
+
+                            + Add Pole
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                <tr>
+
+                                    <th>
+                                        POLE ID
+                                    </th>
+
+                                    <th>
+                                        ESP32
+                                    </th>
+
+                                    <th>
+                                        LOCATION
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        ACTION
+                                    </th>
+
+                                </tr>
+
+                                </thead>
+
+
+                                <tbody id="poleTable">
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-001</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-001
+                                    </td>
+
+                                    <td>
+                                        Zone A
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status online">
+                                            ONLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-002</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-002
+                                    </td>
+
+                                    <td>
+                                        Zone A
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status online">
+                                            ONLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-003</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-003
+                                    </td>
+
+                                    <td>
+                                        Zone B
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status online">
+                                            ONLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-004</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-004
+                                    </td>
+
+                                    <td>
+                                        Zone B
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status online">
+                                            ONLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-005</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-005
+                                    </td>
+
+                                    <td>
+                                        Zone C
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status offline">
+                                            OFFLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>POL-006</strong>
+                                    </td>
+
+                                    <td>
+                                        ESP32-006
+                                    </td>
+
+                                    <td>
+                                        Zone C
+                                    </td>
+
+                                    <td>
+                                        <span class="table-status online">
+                                            ONLINE
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-btn">
+                                            Configure
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= NOTIFICATIONS ================= -->
+
+                <section
+                    class="settings-section"
+                    id="notifications">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                Notification Settings
+                            </h3>
+
+                            <p>
+                                Configure alert delivery preferences
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            ALERTS
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="preference-list">
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Critical Alerts
+                                    </strong>
+
+                                    <small>
+                                        Notify when a critical condition is detected
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="criticalNotifications"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Warning Alerts
+                                    </strong>
+
+                                    <small>
+                                        Notify when a warning threshold is crossed
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="warningNotifications"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        ESP32 Offline Alert
+                                    </strong>
+
+                                    <small>
+                                        Notify when an ESP32 stops communicating
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="offlineNotifications"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="preference">
+
+                                <div>
+
+                                    <strong>
+                                        Energy Alerts
+                                    </strong>
+
+                                    <small>
+                                        Notify for low battery or energy anomalies
+                                    </small>
+
+                                </div>
+
+                                <label class="switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="energyNotifications"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= DATA ================= -->
+
+                <section
+                    class="settings-section"
+                    id="data">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                Data & Storage
+                            </h3>
+
+                            <p>
+                                Manage monitoring data and export options
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            DATA
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <div class="data-actions">
+
+
+                            <div class="data-action">
+
+                                <div class="data-icon">
+                                    ↓
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Export Monitoring Data
+                                    </strong>
+
+                                    <small>
+                                        Download current configuration and demo data
+                                    </small>
+
+                                </div>
+
+                                <button
+                                    class="btn secondary"
+                                    id="exportBtn">
+
+                                    Export
+
+                                </button>
+
+                            </div>
+
+
+                            <div class="data-action">
+
+                                <div class="data-icon">
+                                    ⟳
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Clear Demo Data
+                                    </strong>
+
+                                    <small>
+                                        Remove simulated event data from the interface
+                                    </small>
+
+                                </div>
+
+                                <button
+                                    class="btn secondary"
+                                    id="clearDemoBtn">
+
+                                    Clear
+
+                                </button>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================= SYSTEM ================= -->
+
+                <section
+                    class="settings-section"
+                    id="system">
+
+                    <div class="section-title">
+
+                        <div>
+
+                            <h3>
+                                System Administration
+                            </h3>
+
+                            <p>
+                                System health and configuration management
+                            </p>
+
+                        </div>
+
+                        <span class="section-status">
+                            ADMIN
+                        </span>
+
+                    </div>
+
+
+                    <div class="health-grid">
+
+
+                        <div class="health-item">
+
+                            <span class="health-label">
+                                DASHBOARD
+                            </span>
+
+                            <strong>
+                                ONLINE
+                            </strong>
+
+                            <small class="green">
+                                Operational
+                            </small>
+
+                        </div>
+
+
+                        <div class="health-item">
+
+                            <span class="health-label">
+                                ESP32 NETWORK
+                            </span>
+
+                            <strong>
+                                5 / 6
+                            </strong>
+
+                            <small class="green">
+                                Nodes online
+                            </small>
+
+                        </div>
+
+
+                        <div class="health-item">
+
+                            <span class="health-label">
+                                SENSOR SYSTEM
+                            </span>
+
+                            <strong>
+                                HEALTHY
+                            </strong>
+
+                            <small class="green">
+                                Monitoring active
+                            </small>
+
+                        </div>
+
+
+                        <div class="health-item">
+
+                            <span class="health-label">
+                                CONFIGURATION
+                            </span>
+
+                            <strong id="configStatus">
+                                SAVED
+                            </strong>
+
+                            <small>
+                                Current profile
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="danger-zone">
+
+                        <div>
+
+                            <strong>
+                                Reset Configuration
+                            </strong>
+
+                            <p>
+                                Restore dashboard settings to the default
+                                demonstration configuration.
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="danger-btn"
+                            id="dangerReset">
+
+                            Reset System
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <span>
+                VIKRAMA SMART POLE MONITORING SYSTEM
+            </span>
+
+            <span>
+                SYSTEM SETTINGS MODULE
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
