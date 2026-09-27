@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmartGrid | Pole Registry</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="pole-registry.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="brand">
+
+            <div class="brand-logo">
+
+                <i class="fa-solid fa-bolt"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    SMART<span>GRID</span>
+                </h2>
+
+                <p>
+                    POLE INTELLIGENCE
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="site-selector">
+
+            <div class="site-icon">
+
+                <i class="fa-solid fa-industry"></i>
+
+            </div>
+
+
+            <div class="site-info">
+
+                <small>
+                    ACTIVE SITE
+                </small>
+
+                <strong>
+                    Industrial Site A
+                </strong>
+
+                <span>
+                    <i class="fa-solid fa-circle"></i>
+                    System Online
+                </span>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+
+        <nav class="main-navigation">
+
+
+            <div class="nav-section-title">
+                COMMAND CENTER
+            </div>
+
+
+            <a
+                href="index.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                MONITORING
+            </div>
+
+
+            <a
+                href="pole-registry.html"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                </span>
+
+                <span>
+                    Pole Registry
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-arrows-to-circle"></i>
+                </span>
+
+                <span>
+                    Pole Tilt
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-wave-square"></i>
+                </span>
+
+                <span>
+                    Conductor Sag
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </span>
+
+                <span>
+                    Leakage Current
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-solar-panel"></i>
+                </span>
+
+                <span>
+                    Solar & Battery
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                SYSTEM
+            </div>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+
+                <span>
+                    Alerts & Events
+                </span>
+
+                <span class="nav-badge">
+                    3
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-microchip"></i>
+                </span>
+
+                <span>
+                    ESP32 Connectivity
+                </span>
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span class="nav-icon">
+                    <i class="fa-solid fa-sliders"></i>
+                </span>
+
+                <span>
+                    System Settings
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        ESP32 Gateway
+                    </strong>
+
+                    <small>
+                        Connected • 42 ms
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    SW
+                </div>
+
+                <div>
+
+                    <strong>
+                        System Operator
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+                <i class="fa-solid fa-ellipsis"></i>
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div class="page-title">
+
+
+                <div
+                    class="mobile-menu"
+                    id="mobileMenu"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1>
+                        Pole Registry
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            Smart Pole Network
+                        </span>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                        <strong>
+                            Pole Registry
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <div class="live-clock">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <div>
+
+                        <strong id="currentTime">
+                            --:--:--
+                        </strong>
+
+                        <span id="currentDate">
+                            ---
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="connection-status">
+
+                    <span class="connection-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            ESP32
+                        </strong>
+
+                        <small>
+                            Connected
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <button class="icon-button">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <button
+                    class="icon-button"
+                    id="fullscreenBtn"
+                >
+
+                    <i class="fa-solid fa-expand"></i>
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+             ===================================================== -->
+
+        <section class="content">
+
+
+            <!-- PAGE INTRO -->
+
+            <div class="page-intro">
+
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-database"></i>
+
+                        ASSET MANAGEMENT
+
+                    </span>
+
+
+                    <h2>
+                        Pole Network Registry
+                    </h2>
+
+
+                    <p>
+                        Monitor, inspect and manage every connected
+                        smart pole across the industrial network.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="export-button"
+                    id="exportBtn"
+                >
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Export Registry
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+                 ================================================= -->
+
+            <div class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon blue">
+
+                        <i class="fa-solid fa-tower-broadcast"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            TOTAL POLES
+                        </span>
+
+                        <strong id="totalCount">
+                            12
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-mini">
+                        100% deployed
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon green">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            ONLINE
+                        </span>
+
+                        <strong id="onlineCount">
+                            10
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-mini green-text">
+                        83.3%
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon orange">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            WARNING
+                        </span>
+
+                        <strong id="warningCount">
+                            1
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-mini orange-text">
+                        Inspection
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon red">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            OFFLINE
+                        </span>
+
+                        <strong id="offlineCount">
+                            1
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-mini red-text">
+                        Attention
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONTROL BAR
+                 ================================================= -->
+
+            <div class="control-bar">
+
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search Pole ID, location or ESP32..."
+                    >
+
+                    <kbd>
+                        /
+                    </kbd>
+
+                </div>
+
+
+                <div class="filter-group">
+
+
+                    <button
+                        class="filter-button active"
+                        data-filter="all"
+                    >
+                        All Poles
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        data-filter="online"
+                    >
+                        <span class="filter-dot green"></span>
+                        Online
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        data-filter="warning"
+                    >
+                        <span class="filter-dot orange"></span>
+                        Warning
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        data-filter="offline"
+                    >
+                        <span class="filter-dot red"></span>
+                        Offline
+                    </button>
+
+
+                </div>
+
+
+                <select id="sortSelect">
+
+                    <option value="id">
+                        Sort: Pole ID
+                    </option>
+
+                    <option value="health">
+                        Sort: Health
+                    </option>
+
+                    <option value="battery">
+                        Sort: Battery
+                    </option>
+
+                    <option value="tilt">
+                        Sort: Tilt
+                    </option>
+
+                    <option value="sag">
+                        Sort: Sag
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REGISTRY TABLE
+                 ================================================= -->
+
+            <div class="registry-panel">
+
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <span class="panel-eyebrow">
+                            CONNECTED ASSETS
+                        </span>
+
+                        <h3>
+                            Pole Inventory
+                        </h3>
+
+                    </div>
+
+
+                    <div class="record-count">
+
+                        Showing
+                        <strong id="visibleCount">
+                            12
+                        </strong>
+                        of
+                        <strong>
+                            12
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    POLE
+                                </th>
+
+                                <th>
+                                    LOCATION
+                                </th>
+
+                                <th>
+                                    STATUS
+                                </th>
+
+                                <th>
+                                    TILT
+                                </th>
+
+                                <th>
+                                    SAG
+                                </th>
+
+                                <th>
+                                    LEAKAGE
+                                </th>
+
+                                <th>
+                                    BATTERY
+                                </th>
+
+                                <th>
+                                    HEALTH
+                                </th>
+
+                                <th>
+                                    LAST UPDATE
+                                </th>
+
+                                <th>
+                                    ACTION
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="registryBody">
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+                <div
+                    class="empty-state"
+                    id="emptyState"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </div>
+
+                    <h3>
+                        No poles found
+                    </h3>
+
+                    <p>
+                        Try changing your search or filter.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REGISTRY FOOTER
+                 ================================================= -->
+
+            <div class="registry-footer">
+
+
+                <div>
+
+                    <span class="live-indicator"></span>
+
+                    Live registry synchronized with ESP32 Gateway
+
+                </div>
+
+
+                <div class="footer-details">
+
+                    <span>
+                        Gateway:
+                        <strong>
+                            ESP32-GW-01
+                        </strong>
+                    </span>
+
+                    <span>
+                        Network:
+                        <strong>
+                            Wi-Fi
+                        </strong>
+                    </span>
+
+                    <span>
+                        Sync:
+                        <strong id="syncTime">
+                            Just now
+                        </strong>
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     POLE DETAIL DRAWER
+     ========================================================= -->
+
+<div
+    class="drawer-overlay"
+    id="drawerOverlay"
+></div>
+
+
+<aside
+    class="pole-drawer"
+    id="poleDrawer"
+>
+
+
+    <div class="drawer-header">
+
+
+        <div>
+
+            <span>
+                POLE PROFILE
+            </span>
+
+            <h2 id="drawerPoleId">
+                POL-001
+            </h2>
+
+        </div>
+
+
+        <button
+            class="close-drawer"
+            id="closeDrawer"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+    </div>
+
+
+
+    <div class="drawer-content">
+
+
+        <!-- POLE STATUS -->
+
+        <div class="profile-status-card">
+
+
+            <div class="profile-status-icon">
+
+                <i class="fa-solid fa-tower-broadcast"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    CURRENT STATUS
+                </span>
+
+                <strong id="drawerStatus">
+                    ONLINE
+                </strong>
+
+                <small id="drawerLastUpdate">
+                    Updated 12 sec ago
+                </small>
+
+            </div>
+
+
+            <div class="profile-health">
+
+                <span>
+                    HEALTH
+                </span>
+
+                <strong id="drawerHealth">
+                    98%
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BASIC INFORMATION -->
+
+        <div class="drawer-section">
+
+
+            <div class="drawer-section-title">
+
+                <span>
+                    ASSET INFORMATION
+                </span>
+
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong id="drawerLocation">
+                        Zone A-01
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        Pole Type
+                    </span>
+
+                    <strong>
+                        Smart Distribution Pole
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        ESP32 Device
+                    </span>
+
+                    <strong id="drawerESP32">
+                        ESP32-001
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span>
+                        Installation
+                    </span>
+
+                    <strong id="drawerInstall">
+                        18 Aug 2026
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SENSOR GRID -->
+
+        <div class="drawer-section">
+
+
+            <div class="drawer-section-title">
+
+                <span>
+                    LIVE SENSOR TELEMETRY
+                </span>
+
+                <span class="live-badge">
+                    LIVE
+                </span>
+
+            </div>
+
+
+            <div class="sensor-grid">
+
+
+                <!-- TILT -->
+
+                <div class="sensor-card">
+
+                    <div class="sensor-card-top">
+
+                        <div class="sensor-icon blue">
+
+                            <i class="fa-solid fa-arrows-to-circle"></i>
+
+                        </div>
+
+                        <span>
+                            POLE TILT
+                        </span>
+
+                    </div>
+
+
+                    <strong id="drawerTilt">
+                        1.8°
+                    </strong>
+
+
+                    <small>
+                        Safe range: 0–3°
+                    </small>
+
+
+                    <div class="sensor-progress">
+
+                        <span
+                            id="tiltProgress"
+                            style="width:60%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SAG -->
+
+                <div class="sensor-card">
+
+                    <div class="sensor-card-top">
+
+                        <div class="sensor-icon purple">
+
+                            <i class="fa-solid fa-wave-square"></i>
+
+                        </div>
+
+                        <span>
+                            CONDUCTOR SAG
+                        </span>
+
+                    </div>
+
+
+                    <strong id="drawerSag">
+                        12.4%
+                    </strong>
+
+
+                    <small>
+                        Safe range: 0–16%
+                    </small>
+
+
+                    <div class="sensor-progress">
+
+                        <span
+                            id="sagProgress"
+                            style="width:48%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LEAKAGE -->
+
+                <div class="sensor-card">
+
+                    <div class="sensor-card-top">
+
+                        <div class="sensor-icon orange">
+
+                            <i class="fa-solid fa-bolt"></i>
+
+                        </div>
+
+                        <span>
+                            LEAKAGE CURRENT
+                        </span>
+
+                    </div>
+
+
+                    <strong id="drawerLeakage">
+                        0.06 A
+                    </strong>
+
+
+                    <small>
+                        Safe range: &lt; 0.10 A
+                    </small>
+
+
+                    <div class="sensor-progress">
+
+                        <span
+                            id="leakageProgress"
+                            style="width:30%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BATTERY -->
+
+                <div class="sensor-card">
+
+                    <div class="sensor-card-top">
+
+                        <div class="sensor-icon green">
+
+                            <i class="fa-solid fa-battery-three-quarters"></i>
+
+                        </div>
+
+                        <span>
+                            BATTERY
+                        </span>
+
+                    </div>
+
+
+                    <strong id="drawerBattery">
+                        92%
+                    </strong>
+
+
+                    <small>
+                        12.7 V • Charging
+                    </small>
+
+
+                    <div class="sensor-progress green-progress">
+
+                        <span
+                            id="batteryProgress"
+                            style="width:92%"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SENSOR CONNECTION -->
+
+        <div class="drawer-section">
+
+
+            <div class="drawer-section-title">
+
+                <span>
+                    SENSOR CONNECTIVITY
+                </span>
+
+            </div>
+
+
+            <div class="connection-list">
+
+
+                <div class="connection-item">
+
+                    <span>
+
+                        <i class="fa-solid fa-arrows-to-circle"></i>
+
+                        MPU6050
+
+                    </span>
+
+                    <strong class="connected">
+                        Connected
+                    </strong>
+
+                </div>
+
+
+                <div class="connection-item">
+
+                    <span>
+
+                        <i class="fa-solid fa-ruler-vertical"></i>
+
+                        Ultrasonic Sensor
+
+                    </span>
+
+                    <strong class="connected">
+                        Connected
+                    </strong>
+
+                </div>
+
+
+                <div class="connection-item">
+
+                    <span>
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        Current Sensor
+
+                    </span>
+
+                    <strong class="connected">
+                        Connected
+                    </strong>
+
+                </div>
+
+
+                <div class="connection-item">
+
+                    <span>
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                        ESP32 Communication
+
+                    </span>
+
+                    <strong class="connected">
+                        Connected
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- MAINTENANCE -->
+
+        <div class="drawer-section">
+
+
+            <div class="drawer-section-title">
+
+                <span>
+                    MAINTENANCE
+                </span>
+
+            </div>
+
+
+            <div class="maintenance-box">
+
+
+                <div>
+
+                    <span>
+                        Last Inspection
+                    </span>
+
+                    <strong id="drawerInspection">
+                        08 Sep 2026
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Next Inspection
+                    </span>
+
+                    <strong>
+                        08 Dec 2026
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Condition
+                    </span>
+
+                    <strong class="green-text">
+                        Good
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="drawer-footer">
+
+
+        <button class="secondary-button">
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            View History
+
+        </button>
+
+
+        <button class="primary-button">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Open Analytics
+
+        </button>
+
+
+    </div>
+
+
+</aside>
+
+
+
+<div
+    class="toast"
+    id="toast"
+>
+
+    <i class="fa-solid fa-check"></i>
+
+    <div>
+
+        <strong id="toastTitle">
+            Success
+        </strong>
+
+        <span id="toastMessage">
+            Operation completed.
+        </span>
+
+    </div>
+
+</div>
+
+
+<script src="pole-registry.js"></script>
+
+</body>
+
+</html>
